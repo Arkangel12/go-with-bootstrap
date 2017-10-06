@@ -15,4 +15,4 @@ configuration that it's needed so Bootstrap on a Go web example.
 
 
 
-Feel free to give some feedback i'm on leaning mode! ;)
+Feel free to give some feedback i'm on learning mode! ;)
