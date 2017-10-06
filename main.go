@@ -4,8 +4,9 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"github.com/Arkangel12/go-with-bootstrap/common"
 	"net/smtp"
+	//"github.com/Arkangel12/go-with-bootstrap/common"
+	"./common"
 )
 
 type enviarCorreo struct {
