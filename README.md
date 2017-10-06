@@ -13,6 +13,7 @@ configuration that it's needed so Bootstrap on a Go web example.
 *Dockerfile to give it a try if you need to. (you need to install docker before this) <br />
 
 
-
+#To run docker property and listen on 80 port
+#docker run -d -p 80:8080 <image> (this  may change if yo use other options)
 
 Feel free to give some feedback i'm on learning mode! ;)
