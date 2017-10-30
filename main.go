@@ -57,10 +57,10 @@ func blog(w http.ResponseWriter, req *http.Request) {
 }
 
 func contact(w http.ResponseWriter, req *http.Request) {
-	var correo mail.EnviarCorreo
+	var correo mail.Mail
 
 	if req.Method == http.MethodPost {
-		correo = mail.EnviarCorreo{
+		correo = mail.Mail{
 			Nombre:   req.FormValue("nombre"),
 			Correo:   req.FormValue("correo"),
 			Telefono: req.FormValue("telefono"),

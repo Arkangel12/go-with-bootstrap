@@ -13,7 +13,7 @@ type configuration struct {
 	Oemail string `json: "oemail"`
 }
 
-type EnviarCorreo struct {
+type Mail struct {
 	Nombre   string
 	Correo   string
 	Telefono string
@@ -41,7 +41,7 @@ func loadAppConfig() {
 }
 
 
-func Send(correo EnviarCorreo) {
+func Send(correo Mail) {
 	from := AppConfig.Email
 	pass := AppConfig.Password
 	to := AppConfig.Oemail
