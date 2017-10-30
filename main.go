@@ -4,9 +4,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"net/smtp"
-	//"github.com/Arkangel12/go-with-bootstrap/common"
-	"./common"
+	"./mail"
 )
 
 type enviarCorreo struct {
@@ -23,8 +21,8 @@ func init() {
 }
 
 func main() {
-	common.InitConfig()
-
+	mail.InitConfig()
+	
 	http.HandleFunc("/", idx)
 	http.HandleFunc("/about", about)
 	http.HandleFunc("/blog", blog)
@@ -76,7 +74,7 @@ func contact(w http.ResponseWriter, req *http.Request) {
 			Mensaje:  req.FormValue("mensaje"),
 		}
 
-		send(correo)
+		mail.Send(correo.Mensaje)
 	}
 
 	err := tpl.ExecuteTemplate(w, "contact.gohtml", nil)
@@ -88,26 +86,3 @@ func contact(w http.ResponseWriter, req *http.Request) {
 
 }
 
-func send(correo enviarCorreo) {
-	from := common.AppConfig.Email
-	pass := common.AppConfig.Password
-	//to := correo.Correo
-	to := common.AppConfig.Oemail
-
-	msg := "From: " + from + "\n" +
-		"To: " + to + "\n" +
-		"Subject: Hello there\n\n" +
-		correo.Mensaje
-
-	err := smtp.SendMail("smtp.gmail.com:587",
-		smtp.PlainAuth("", from, pass, "smtp.gmail.com"),
-		from, []string{to}, []byte(msg))
-
-
-	if err != nil {
-		log.Printf("smtp error: %s", err)
-		return
-	}
-
-	log.Print("Your message has been sent!")
-}
