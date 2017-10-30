@@ -7,13 +7,6 @@ import (
 	"./mail"
 )
 
-type enviarCorreo struct {
-	Nombre   string
-	Correo   string
-	Telefono string
-	Mensaje  string
-}
-
 var tpl *template.Template
 
 func init() {
@@ -64,17 +57,17 @@ func blog(w http.ResponseWriter, req *http.Request) {
 }
 
 func contact(w http.ResponseWriter, req *http.Request) {
-	var correo enviarCorreo
+	var correo mail.EnviarCorreo
 
 	if req.Method == http.MethodPost {
-		correo = enviarCorreo{
+		correo = mail.EnviarCorreo{
 			Nombre:   req.FormValue("nombre"),
 			Correo:   req.FormValue("correo"),
 			Telefono: req.FormValue("telefono"),
 			Mensaje:  req.FormValue("mensaje"),
 		}
 
-		mail.Send(correo.Mensaje)
+		mail.Send(correo)
 	}
 
 	err := tpl.ExecuteTemplate(w, "contact.gohtml", nil)

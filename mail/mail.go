@@ -13,6 +13,13 @@ type configuration struct {
 	Oemail string `json: "oemail"`
 }
 
+type EnviarCorreo struct {
+	Nombre   string
+	Correo   string
+	Telefono string
+	Mensaje  string
+}
+
 var AppConfig configuration
 
 func InitConfig()  {
@@ -34,7 +41,7 @@ func loadAppConfig() {
 }
 
 
-func Send(Mensaje string) {
+func Send(correo EnviarCorreo) {
 	from := AppConfig.Email
 	pass := AppConfig.Password
 	to := AppConfig.Oemail
@@ -42,7 +49,9 @@ func Send(Mensaje string) {
 	msg := "From: " + from + "\n" +
 		"To: " + to + "\n" +
 		"Subject: Hello there\n\n" +
-		Mensaje
+		correo.Mensaje
+
+
 
 	err := smtp.SendMail("smtp.gmail.com:587",
 		smtp.PlainAuth("", from, pass, "smtp.gmail.com"),
