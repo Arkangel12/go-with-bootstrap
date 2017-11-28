@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+
 	"./mail"
 )
 
@@ -15,7 +17,7 @@ func init() {
 
 func main() {
 	mail.InitConfig()
-	
+
 	http.HandleFunc("/", idx)
 	http.HandleFunc("/about", about)
 	http.HandleFunc("/blog", blog)
@@ -23,6 +25,7 @@ func main() {
 
 	http.Handle("/favicon.ico", http.NotFoundHandler())
 	http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
+	fmt.Println("Running over localhost:8080")
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -78,4 +81,3 @@ func contact(w http.ResponseWriter, req *http.Request) {
 	}
 
 }
-
