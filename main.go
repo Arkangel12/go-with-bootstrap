@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"./mail"
+	"github.com/Arkangel12/go-with-bootstrap/mail"
 )
 
 var tpl *template.Template
